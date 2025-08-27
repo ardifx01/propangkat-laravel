@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Styles for ProPangkat */
+@layer components {
+    /* Custom Input Styles */
+    .custom-input {
+        @apply block w-full px-4 py-2.5 bg-white/10 dark:bg-gray-700/20 border-white/20 dark:border-gray-600/30 text-white placeholder-white/50 focus:border-white/50 focus:ring-white/50 rounded-lg shadow-sm;
+    }
+    
+    /* Button Styles */
+    .btn-primary {
+        @apply py-2.5 px-4 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-medium rounded-lg transition-all duration-200 transform hover:scale-[1.02];
+    }
+    
+    .btn-secondary {
+        @apply py-2.5 px-4 bg-white/10 hover:bg-white/20 dark:bg-gray-700/20 dark:hover:bg-gray-600/30 text-white font-medium rounded-lg transition-all duration-200 border border-white/20 dark:border-gray-600/30;
+    }
+    
+    /* Card Styles */
+    .glass-card {
+        @apply bg-white/10 dark:bg-gray-800/20 border border-white/30 dark:border-gray-700/30 rounded-xl backdrop-blur-md shadow-lg;
+    }
+    
+    .role-card-active {
+        @apply ring-2 ring-white;
+    }
+    
+    /* Animation Classes */
+    .animate-fadeInUp {
+        animation: fadeInUp 0.6s ease-out forwards;
+        opacity: 0;
+    }
+    
+    .animate-fadeInScale {
+        animation: fadeInScale 0.3s ease forwards;
+        opacity: 0;
+    }
+    
+    /* Helper Classes */
+    .text-gradient {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-cyan-400;
+    }
+}
