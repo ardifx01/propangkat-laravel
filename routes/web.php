@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
@@ -9,10 +10,11 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     // Get the user role from session (set during login)
-    $userRole = session('user_role', 'pegawai');
+    $user = Auth::user();
+    $userRole = session('user_role', $user ? $user->role : 'pegawai');
     
     // Pass the role to the dashboard view
-    return view('dashboard', ['userRole' => $userRole]);
+    return view('pages.dashboard.index', ['userRole' => $userRole]);
 })->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

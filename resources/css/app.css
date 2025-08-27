@@ -2,6 +2,171 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.75rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-500;
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .mobile-optimized {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Prevent zoom on input focus for iOS */
+@media screen and (max-width: 768px) {
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="number"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Loading animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.dark .animate-shimmer {
+  background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+  background-size: 200px 100%;
+}
+
+@layer utilities {
+  .progress-bar {
+    @apply h-full bg-blue-500 rounded-full transition-all duration-300;
+  }
+
+  /* Progress bar width classes */
+  .progress-bar[data-width="0"] { width: 0%; }
+  .progress-bar[data-width="1"] { width: 1%; }
+  .progress-bar[data-width="2"] { width: 2%; }
+  .progress-bar[data-width="3"] { width: 3%; }
+  .progress-bar[data-width="4"] { width: 4%; }
+  .progress-bar[data-width="5"] { width: 5%; }
+  .progress-bar[data-width="10"] { width: 10%; }
+  .progress-bar[data-width="15"] { width: 15%; }
+  .progress-bar[data-width="20"] { width: 20%; }
+  .progress-bar[data-width="25"] { width: 25%; }
+  .progress-bar[data-width="30"] { width: 30%; }
+  .progress-bar[data-width="33"] { width: 33%; }
+  .progress-bar[data-width="35"] { width: 35%; }
+  .progress-bar[data-width="40"] { width: 40%; }
+  .progress-bar[data-width="45"] { width: 45%; }
+  .progress-bar[data-width="50"] { width: 50%; }
+  .progress-bar[data-width="55"] { width: 55%; }
+  .progress-bar[data-width="60"] { width: 60%; }
+  .progress-bar[data-width="65"] { width: 65%; }
+  .progress-bar[data-width="66"] { width: 66%; }
+  .progress-bar[data-width="70"] { width: 70%; }
+  .progress-bar[data-width="75"] { width: 75%; }
+  .progress-bar[data-width="80"] { width: 80%; }
+  .progress-bar[data-width="85"] { width: 85%; }
+  .progress-bar[data-width="90"] { width: 90%; }
+  .progress-bar[data-width="95"] { width: 95%; }
+  .progress-bar[data-width="100"] { width: 100%; }
+}
+
 /* Custom Styles for ProPangkat */
 @layer components {
     /* Custom Input Styles */
