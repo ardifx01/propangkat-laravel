@@ -12,6 +12,9 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
 
+        <!-- Lucide Icons -->
+        <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         
@@ -100,5 +103,17 @@
         </div>
 
         @stack('scripts')
+        
+        <script>
+            // Initialize Lucide icons
+            document.addEventListener('DOMContentLoaded', function() {
+                lucide.createIcons();
+            });
+            
+            // Re-initialize icons when Alpine.js updates the DOM
+            document.addEventListener('alpine:initialized', function() {
+                lucide.createIcons();
+            });
+        </script>
     </body>
 </html>
