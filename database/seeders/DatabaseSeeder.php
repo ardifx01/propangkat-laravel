@@ -18,15 +18,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Administrator',
             'email' => 'admin@propangkat.com',
             'username' => 'admin',
+            'nip' => '198001012001121001',
             'password' => bcrypt('admin123'),
-        ]);
-
-        // Create a verifikator user
-        User::factory()->verifikator()->create([
-            'name' => 'Verifikator',
-            'email' => 'verifikator@propangkat.com',
-            'username' => 'verifikator',
-            'password' => bcrypt('verifikator123'),
         ]);
 
         // Create an operator user
@@ -34,14 +27,25 @@ class DatabaseSeeder extends Seeder
             'name' => 'Operator',
             'email' => 'operator@propangkat.com',
             'username' => 'operator',
+            'nip' => '198001012001121002',
             'password' => bcrypt('operator123'),
+        ]);
+        
+        // Create an operator sekolah user
+        User::factory()->operatorSekolah()->create([
+            'name' => 'Operator Sekolah',
+            'email' => 'opsekolah@propangkat.com',
+            'username' => 'opsekolah',
+            'nip' => '198001012001121003',
+            'password' => bcrypt('opsekolah123'),
         ]);
 
         // Create a regular pegawai user
         User::factory()->pegawai()->create([
             'name' => 'Pegawai',
             'email' => 'pegawai@propangkat.com',
-            'username' => '198901012020011001',
+            'username' => 'pegawai',
+            'nip' => '198901012020011001',
             'password' => bcrypt('pegawai123'),
         ]);
         

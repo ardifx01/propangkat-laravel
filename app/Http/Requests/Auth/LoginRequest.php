@@ -27,9 +27,28 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string'], // Changed to accept both email or username/NIP
+            'nip' => ['required', 'string', 'size:18'], // NIP with 18 digits
             'password' => ['required', 'string'],
-            'role' => ['required', 'string', 'in:admin,verifikator,operator,pegawai'],
+            'role' => ['required', 'string', 'in:admin,operator,operator-sekolah,pegawai'],
+            'captcha' => ['required', 'string'],
+            'captchaCode' => ['required', 'string', 'same:captcha'],
+        ];
+    }
+    
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array
+     */
+    public function messages(): array
+    {
+        return [
+            'nip.required' => 'NIP wajib diisi.',
+            'nip.size' => 'NIP harus terdiri dari 18 digit.',
+            'captcha.required' => 'Kode captcha wajib diisi.',
+            'captchaCode.same' => 'Kode captcha tidak valid.',
+            'role.required' => 'Silakan pilih jenis pengguna.',
+            'role.in' => 'Jenis pengguna tidak valid.',
         ];
     }
 
@@ -44,23 +63,20 @@ class LoginRequest extends FormRequest
 
         $input = $this->validated();
         
-        // Check if the input is an email or username
-        $loginField = filter_var($input['email'], FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        
-        // Set up credentials
+        // Set up credentials using NIP
         $credentials = [
-            $loginField => $input['email'],
+            'nip' => $input['nip'],
             'password' => $input['password']
         ];
 
-        // Attempt authentication with remember me
-        $remember = isset($input['remember']);
+        // Get remember value
+        $remember = $this->remember ?? false;
         
         if (! Auth::attempt($credentials, $remember)) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'nip' => trans('auth.failed'),
             ]);
         }
 
@@ -98,6 +114,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->validated('email')).'|'.request()->ip());
+        return Str::transliterate(Str::lower($this->validated('nip')).'|'.request()->ip());
     }
 }

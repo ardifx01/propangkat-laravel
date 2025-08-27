@@ -26,10 +26,11 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'username' => fake()->unique()->numerify('##############'), // Fake NIP-like number
+            'username' => fake()->unique()->userName(),
+            'nip' => fake()->unique()->numerify('##################'), // 18 digit NIP
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
-            'role' => fake()->randomElement(['admin', 'verifikator', 'operator', 'pegawai']),
+            'role' => fake()->randomElement(['admin', 'operator', 'operator-sekolah', 'pegawai']),
             'remember_token' => Str::random(10),
         ];
     }
@@ -55,12 +56,12 @@ class UserFactory extends Factory
     }
     
     /**
-     * Create a verifikator user
+     * Create an operator-sekolah user
      */
-    public function verifikator(): static
+    public function operatorSekolah(): static
     {
         return $this->state(fn (array $attributes) => [
-            'role' => 'verifikator',
+            'role' => 'operator-sekolah',
         ]);
     }
     
