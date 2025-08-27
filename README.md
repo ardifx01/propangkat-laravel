@@ -5,7 +5,7 @@
 [![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?logo=php)](https://php.net)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.x-38B2AC?logo=tailwind-css)](https://tailwindcss.com)
 [![AlpineJS](https://img.shields.io/badge/Alpine.js-3.x-8BC0D0?logo=alpine.js)](https://alpinejs.dev)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/License-Proprietary-red.svg)](#-lisensi)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" alt="Laravel Logo" width="300">
@@ -236,11 +236,18 @@ php artisan test
 
 ## 📝 Lisensi
 
-Proyek ini dilisensikan di bawah [MIT License](LICENSE).
+```
+This software is proprietary and confidential.
+Unauthorized copying, modification, use, or distribution of this software,
+via any medium, is strictly prohibited without the express permission of the author.
+
+Copyright © 2025 KOU & Dinas Pendidikan dan Kebudayaan Provinsi Kalimantan Timur
+All rights reserved.
+```
 
 ## 🤝 Kontribusi
 
-Kontribusi sangat diterima! Silakan fork repository ini, buat branch fitur, tambahkan perubahan Anda, dan buat pull request.
+Kontribusi hanya dapat dilakukan dengan izin tertulis dari pemilik hak cipta. Silakan hubungi tim pengembang untuk informasi lebih lanjut.
 
 ## 🌐 Link Terkait
 
@@ -250,5 +257,5 @@ Kontribusi sangat diterima! Silakan fork repository ini, buat branch fitur, tamb
 ---
 
 <p align="center">
-  Dibuat dengan ❤️ oleh Tim ProPangkat untuk Dinas Pendidikan dan Kebudayaan Provinsi Kalimantan Timur.
+  Dibuat dengan ❤️ oleh Tim VanDevs untuk Dinas Pendidikan dan Kebudayaan Provinsi Kalimantan Timur.
 </p>
