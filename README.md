@@ -1,5 +1,20 @@
 # ProPangkat - Proses Kenaikan Pangkat Terintegrasi
 
+## 📄 Dokumen Proyek
+
+Lihat dokumen [PRD & PSD (Project Requirement & Specification Document)](./PRD.md) untuk detail kebutuhan, spesifikasi, dan arsitektur proyek.
+
+### Ringkasan PRD/PSD
+
+- Digitalisasi proses kenaikan pangkat pegawai secara terintegrasi
+- Multi-role login: Admin, Operator, Operator Sekolah, Pegawai
+- Validasi NIP, captcha custom, dan keamanan berlapis
+- Dashboard, manajemen data pegawai, upload & validasi dokumen
+- Laporan, rekap, dan notifikasi status
+- UI minimalis, modern, responsif (TailwindCSS, Alpine.js)
+- Backend Laravel 12.x, database SQLite/MySQL
+- Lihat PRD.md untuk detail lengkap
+
 [![wakatime](https://wakatime.com/badge/user/cc62a71b-688a-408a-96de-c02f19b880ec/project/2ac163b6-3716-45a8-b1ae-95256de24150.svg)](https://wakatime.com/badge/user/cc62a71b-688a-408a-96de-c02f19b880ec/project/2ac163b6-3716-45a8-b1ae-95256de24150)
 [![Laravel](https://img.shields.io/badge/Laravel-12.x-FF2D20?logo=laravel)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?logo=php)](https://php.net)
