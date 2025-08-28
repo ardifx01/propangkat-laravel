@@ -1,41 +1,59 @@
-@props(['id' => 'captcha', 'class' => ''])
+@props(['id' => 'captcha'])
 
-<div x-data="captchaComponent()" {{ $attributes->merge(['class' => $class]) }}>
-    <div class="relative">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
-            <i data-lucide="shield-check" class="w-5 h-5"></i>
-        </div>
-        <input 
-            type="text" 
-            id="{{ $id }}" 
-            name="captcha" 
-            class="block w-full pl-10 bg-white/10 dark:bg-gray-700/20 border-white/20 dark:border-gray-600/30 text-white placeholder-white/50 focus:border-white/50 focus:ring-white/50 rounded-lg shadow-sm"
-            placeholder="Masukkan kode captcha"
-            required
-            x-model="userInput"
-            @input="validateCaptcha"
-        />
-        <button 
-            type="button" 
-            class="absolute inset-y-0 right-0 pr-3 flex items-center text-white/70 hover:text-white"
-            @click="refreshCaptcha"
-        >
-            <i data-lucide="refresh-cw" class="w-5 h-5"></i>
-        </button>
-    </div>
+<div x-data="captchaComponent()" 
+     class="captcha-component">
     
-    <div class="mt-2">
-        <div class="flex items-center justify-center">
-            <div class="bg-white/20 dark:bg-gray-700/20 border border-white/30 dark:border-gray-600/30 rounded-md p-3 flex items-center justify-center w-full">
-                <div class="select-none tracking-[.25em] captcha-text text-white font-bold text-xl" x-text="captchaCode" x-ref="captchaDisplay"></div>
+    <!-- Captcha Label -->
+    <label for="{{ $id }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <i data-lucide="shield" class="w-4 h-4 inline-block mr-1 opacity-70"></i>
+        Kode Verifikasi
+    </label>
+    
+    <!-- Simple Captcha -->
+    <div class="space-y-2">
+        <!-- Captcha Display -->
+        <div class="flex items-center">
+            <div class="relative flex-1">
+                <div class="select-none text-center py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="captcha-text tracking-wide font-mono flex items-center justify-center" x-ref="captchaDisplay"></div>
+                </div>
             </div>
+            
+            <!-- Refresh Button -->
+            <button 
+                type="button" 
+                @click="refreshCaptcha"
+                class="ml-2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                title="Refresh Captcha">
+                <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+            </button>
         </div>
+        
+        <!-- Captcha Input -->
+        <div class="relative">
+            <input 
+                type="text" 
+                id="{{ $id }}" 
+                name="captcha"
+                x-model="userInput"
+                @input="validateCaptcha"
+                class="block w-full rounded-lg border-gray-200 dark:border-gray-700 dark:bg-gray-800 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-blue-500 text-center tracking-wide font-mono"
+                :class="{'border-green-300': validation.valid && validation.status, 'border-red-300': !validation.valid && validation.status}"
+                placeholder="Masukkan kode di atas"
+                autocomplete="off"
+                maxlength="6"
+                required
+            >
+        </div>
+        
+        <!-- Status Message -->
         <div 
             x-show="validation.status" 
             x-text="validation.message"
-            :class="{'text-green-300': validation.valid, 'text-red-300': !validation.valid}"
-            class="text-sm mt-1"
+            :class="{'text-green-600 dark:text-green-400': validation.valid, 'text-red-600 dark:text-red-400': !validation.valid}"
+            class="text-xs font-medium text-center"
         ></div>
+        
         <input type="hidden" name="captchaCode" x-model="captchaCode">
     </div>
 </div>
@@ -60,13 +78,26 @@ function captchaComponent() {
         },
         
         generateCaptcha() {
-            const characters = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
-            let result = '';
-            const length = 6;
+            // Mix of uppercase, lowercase letters and numbers (simplified for readability)
+            // Exclude confusing characters like 0, O, I, l, 1
+            const uppercase = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+            const lowercase = 'abcdefghijkmnpqrstuvwxyz';
+            const numbers = '23456789';
             
-            for (let i = 0; i < length; i++) {
-                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            // Ensure at least one character from each set
+            let result = '';
+            result += uppercase.charAt(Math.floor(Math.random() * uppercase.length));
+            result += lowercase.charAt(Math.floor(Math.random() * lowercase.length));
+            result += numbers.charAt(Math.floor(Math.random() * numbers.length));
+            
+            // Add three more random characters from all sets
+            const allChars = uppercase + lowercase + numbers;
+            for (let i = 0; i < 3; i++) {
+                result += allChars.charAt(Math.floor(Math.random() * allChars.length));
             }
+            
+            // Shuffle the result
+            result = result.split('').sort(() => 0.5 - Math.random()).join('');
             
             this.captchaCode = result;
             this.$nextTick(() => {
@@ -81,27 +112,17 @@ function captchaComponent() {
             // Clear existing styling
             text.innerHTML = '';
             
-            // Apply distortion to each character
-            Array.from(this.captchaCode).forEach(char => {
-                const span = document.createElement('span');
-                span.textContent = char;
-                span.style.display = 'inline-block';
-                span.style.transform = `rotate(${Math.random() * 20 - 10}deg) translateY(${Math.random() * 6 - 3}px)`;
-                span.style.opacity = Math.random() * 0.5 + 0.5;
-                span.style.textShadow = `0 0 ${Math.random() * 5}px rgba(255,255,255,0.7)`;
-                text.appendChild(span);
-            });
+            // Create a single element with fixed styling for better readability
+            text.style.fontSize = '20px';
+            text.style.fontWeight = '600';
+            text.style.letterSpacing = '3px';
+            text.style.fontFamily = 'monospace';
+            text.innerText = this.captchaCode;
             
-            // Add some noise
-            for (let i = 0; i < 10; i++) {
-                const dot = document.createElement('span');
-                dot.textContent = '.';
-                dot.style.position = 'absolute';
-                dot.style.color = 'rgba(255,255,255,0.4)';
-                dot.style.top = `${Math.random() * 100}%`;
-                dot.style.left = `${Math.random() * 100}%`;
-                text.appendChild(dot);
-            }
+            // Add simple background styling
+            text.parentElement.style.background = 'linear-gradient(to right, #f0f9ff, #e0f2fe)';
+            text.parentElement.classList.add('dark:bg-gray-800');
+            text.parentElement.classList.add('dark:border-gray-700');
         },
         
         refreshCaptcha() {
@@ -115,10 +136,10 @@ function captchaComponent() {
                 this.validation.status = true;
                 if (this.userInput === this.captchaCode) {
                     this.validation.valid = true;
-                    this.validation.message = 'Captcha valid';
+                    this.validation.message = 'Kode verifikasi valid';
                 } else {
                     this.validation.valid = false;
-                    this.validation.message = 'Captcha tidak valid';
+                    this.validation.message = 'Kode verifikasi tidak valid';
                 }
             } else {
                 this.validation.status = false;
