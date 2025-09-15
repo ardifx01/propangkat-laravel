@@ -66,7 +66,7 @@ Pastikan Anda telah menginstal:
 1. **Clone repository**
 
    ```bash
-   git clone https://github.com/fk0u/propangkat-laravel.git
+   git clone https://github.com/ardifx01/propangkat-laravel.git
    cd propangkat-laravel
    ```
 
@@ -264,13 +264,8 @@ All rights reserved.
 
 Kontribusi hanya dapat dilakukan dengan izin tertulis dari pemilik hak cipta. Silakan hubungi tim pengembang untuk informasi lebih lanjut.
 
-## 🌐 Link Terkait
-
-- [Versi Next.js](https://github.com/fk0u/propangkat-next) - [![wakatime](https://wakatime.com/badge/user/cc62a71b-688a-408a-96de-c02f19b880ec/project/c20c4481-58fd-4844-b486-29c21c43fdbf.svg)](https://wakatime.com/badge/user/cc62a71b-688a-408a-96de-c02f19b880ec/project/c20c4481-58fd-4844-b486-29c21c43fdbf)
-- [Website Resmi Dinas Pendidikan dan Kebudayaan Prov. Kaltim](https://disdik.kaltimprov.go.id)
-
 ---
 
 <p align="center">
-  Dibuat dengan ❤️ oleh Tim VanDevs untuk Dinas Pendidikan dan Kebudayaan Provinsi Kalimantan Timur.
+  Dibuat dengan ❤️ oleh Mnkdev untuk Dinas Pendidikan dan Kebudayaan Provinsi Jawa Tengah
 </p>
